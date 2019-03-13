@@ -14,7 +14,9 @@ const clients = [{
     isSubscribed: true,
     orders: [720]
 }];
-const mailing = (clients) => clients.filter((item) => item.isSubscribed === true).forEach((item) => console.log(`${item.name}, ваш заказ принят, подробности вашего заказа в письме, которое мы отправили на ${item.email}`));
+const mailing = (clients) => clients.filter((item) =>
+    item.isSubscribed === true).forEach((item) =>
+    console.log(`${item.name}, ваш заказ принят, подробности вашего заказа в письме, которое мы отправили на ${item.email}`));
 mailing(clients);
 
 

@@ -14,10 +14,10 @@ const clients = [{
     isSubscribed: true,
     orders: [720]
 }];
-const chageName = (clients, clientNumber, newName) => {
-    const copy = Object.assign({}, clients);
-    copy[clientNumber - 1].name = newName;
-    return copy;
+const chageName = (clients, arrayNumber, newName) => {
+    const copy = Object.assign([], clients);
+    copy[arrayNumber].name = newName;
+    return copy
 };
 console.log(clients);
-console.log('\n', chageName(clients, 2, 'Мартин Скорсезе'));
+console.log('\n', chageName(clients, 1, 'Мартин Скорсезе'));
