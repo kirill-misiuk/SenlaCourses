@@ -14,9 +14,10 @@ const clients = [{
     isSubscribed: true,
     orders: [720]
 }];
-const chageName = (clients, arrayNumber, newName) => {
-    const copy = Object.assign([], clients);
-    copy[arrayNumber].name = newName;
+const chageName = (clients, index, newName) => {
+    //const copy = Object.assign([], clients);
+    const copy = clients.concat();
+    copy[index].name = newName;
     return copy
 };
 console.log(clients);
