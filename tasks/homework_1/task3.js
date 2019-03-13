@@ -15,8 +15,7 @@ const clients = [{
     orders: [720]
 }];
 const chageName = (clients, index, newName) => {
-    //const copy = Object.assign([], clients);
-    const copy = clients.concat();
+    const copy = JSON.parse(JSON.stringify(clients));
     copy[index].name = newName;
     return copy
 };
