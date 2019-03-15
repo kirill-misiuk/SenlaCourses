@@ -13,29 +13,25 @@ let veteran = Object.defineProperties(citizen, {
 });
 
 
-Object.create = function (o, prop) {
-    function Temp() {
+Object.create = function (prototype, properties) {
+    function fn() {
     }
 
     let hasOwn = Object.prototype.hasOwnProperty;
-    if (typeof o != 'object') {
+    if (typeof prototype != 'object') {
         throw TypeError('Object prototype may only be an Object or null');
     }
-    Temp.prototype = o;
-    let obj = new Temp();
-    Temp.prototype = null;
+    fn.prototype = prototype;
+    let obj = new fn();
+    fn.prototype = null;
     if (arguments.length > 1) {
         let Properties = Object(arguments[1]);
-        for (let prop in Properties) {
-            if (hasOwn.call(Properties, prop)) {
-                obj[prop] = Properties[prop];
+        for (let properties in Properties) {
+            if (hasOwn.call(Properties, properties)) {
+                obj[properties] = Properties[properties];
             }
         }
         return obj;
     }
 };
 console.log(Object.create(citizen, veteran));
-console.log(veteran !== citizen); // true
-console.log(veteran instanceof citizen.constructor); // true
-console.log(veteran.sleep); // zzZ...
-console.log(veteran.panic); //SNAFU
