@@ -4,7 +4,7 @@ const Array = function (array) {
 
 Array.prototype.map = function (fn) {
     let result = [];
-    for (let i = 0, length = this.array.length; i < length; i++)
+    for (let i = 0; i < this.array.length; i++)
         result.push(fn(this.array[i]));
     return result;
 };
@@ -16,5 +16,7 @@ console.log(array.map(x => 2 * x));
 console.log(array.map(x => 2 ** x));
 console.log(array.map(x => x.toString()));
 console.log(array2.map(x => parseInt(x)));
+
+
 
 

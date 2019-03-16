@@ -14,10 +14,10 @@ const clients = [{
     isSubscribed: true,
     orders: [720]
 }];
-const chageName = (clients, index, newName) => {
+const changeName = (clients, index, newName) => {
     const copy = JSON.parse(JSON.stringify(clients));
     copy[index].name = newName;
     return copy
 };
 console.log(clients);
-console.log('\n', chageName(clients, 1, 'Мартин Скорсезе'));
+console.log('\n', changeName(clients, 1, 'Мартин Скорсезе'));

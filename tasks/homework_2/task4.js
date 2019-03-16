@@ -1,28 +1,21 @@
 class Dictionary {
-    constructor(key, value) {
-        this.key = key;
-        this.value = value
+    newEntry(key, value) {
+        this.key= key;
+        this.value =value;
     }
-
-    static newEntry(key, value) {
-        return new Dictionary(key, value);
-    }
-
     look(key) {
         if (this.key === key) {
-            console.log(this.value)
-        } else console.log(`Can't find entry for key`);
+            return this.value
+        } else return `Can't find entry for key`
     }
-
 }
-
-let entryOne = Dictionary.newEntry('JavaScript', 'An object-oriented computer programming language commonly used to create interactive effects within web browsers.')
-let entryTwo = Dictionary.newEntry('React', 'An open source JavaScript library for developing interfaces.');
-entryOne.look('JavaScript');
-entryTwo.look('React');
-
-
-
+let Entry= new Dictionary();
+Entry.newEntry('JavaScript', 'An object-oriented computer programming language commonly used to create interactive effects within web browsers');
+console.log(Entry.look('JavaScript'));
+console.log(Entry.look('React'));
+Entry.newEntry('React', 'An open source JavaScript library for developing interfaces.');
+console.log(Entry.look('JavaScript'));
+console.log(Entry.look('React'));
 
 
 

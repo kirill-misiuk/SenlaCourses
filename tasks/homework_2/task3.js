@@ -6,7 +6,6 @@ const Warrior = function (name) {
 Warrior.prototype.strike = function (warrior, strength) {
     if (strength >= 0 && warrior.health >= 0) warrior.health -= strength * 10;
     if (warrior.health < 0) warrior.health = 0;
-    console.log(`${this.name} attacks. ${warrior.name} health:`, warrior.health);
 };
 
 
@@ -15,4 +14,6 @@ const man = new Warrior('Arthas');
 
 
 orc.strike(man, 3);
+console.log(`${man.name} XP: ${man.health}`);
 man.strike(orc, 1);
+console.log(`${orc.name} XP: ${orc.health}`);
