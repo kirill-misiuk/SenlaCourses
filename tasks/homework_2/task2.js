@@ -21,7 +21,7 @@ console.log(array1.arr1.map(x => x ** 2));
 console.log(array1.arr1.map(x => 2 * x));
 console.log(array1.arr1.map(x => 2 ** x));
 console.log(array1.arr1.map(x => x.toString()));
-console.log(array2.arr2.map(x => parseInt(x)));
+console.log(array1.arr2.map(x => parseInt(x)));
 
 
 
