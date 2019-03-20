@@ -1,10 +1,10 @@
 let Array = {
     map:function (fn) {
-    let result = [];
-    for (let i = 0; i < this.array.length; i++)
-        result.push(fn(this.array[i]));
-    return result;
-}
+        let result = [];
+        for (let i = 0; i < this.array.length; i++)
+            result.push(fn(this.array[i]));
+        return result;
+    }
 };
 
 
@@ -22,7 +22,3 @@ console.log(array1.arr1.map(x => 2 * x));
 console.log(array1.arr1.map(x => 2 ** x));
 console.log(array1.arr1.map(x => x.toString()));
 console.log(array1.arr2.map(x => parseInt(x)));
-
-
-
-
