@@ -13,9 +13,8 @@ const arr3 = ['dramatic.txt', 'incompetent.jar', 'alcoholic.wp', 'clumsy.py', 'a
     'abashed.css', 'dysfunctional.h', 'gusty.js', 'dynamic.txt', 'dreary.pt', 'giddy.ala', 'exciting.css', 'best.als', 'humdrum.css', 'busy.jar', 'frail.cpp', 'cagey.wav'];
 
 function PopularExtension(arr) {
-    const extension = arr.map((x) => x.replace(/^.*\./, ''));
+    const extension = arr.map((x) => x.replace(/^.*\./, '.'));
     let res = extension.reduce((arr, el) => {
-
         arr[el] = (arr[el] || 0) + 1;
         return arr;
     }, []);
@@ -32,7 +31,8 @@ function PopularExtension(arr) {
             Arr.push(outputArr[key][0])
         }
     }
-    return Arr.sort()
+
+    return Arr.sort();
 }
 console.log(PopularExtension(arr1));
 console.log(PopularExtension(arr2));
