@@ -38,4 +38,11 @@ body {
     align-items: center;
     justify-content: center;
     padding: 100px 0 75px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+#button{
+    height:20px;
+    width:70px;
+    vertical-align: middle;
 }
