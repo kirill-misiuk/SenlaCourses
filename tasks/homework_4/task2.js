@@ -1,36 +1,47 @@
 class TopRated {
 
+
     constructor(hall) {
 
         this.hall = hall || 5;
-        this.player = [];
-        this.array1 = [];
-        this.array2 = [];
-        this.isSet = false;
+        this.mass = []
     }
 
     get list() {
-        this.array1.sort((a, b) => a - b);
 
+        let output = [];
+        let arr = [];
+        const sDecrease = (a, b) => b[1] - a[1];
+        this.mass.sort(sDecrease);
+        for (let i = 0; i < this.mass.length; ++i) {
 
-        return this.player
+            if (this.mass[i][0] === ' ') {
+                output.push(`${this.mass[i][0]}`);
+            } else {
+                output.push(`${this.mass[i][0]}:${this.mass[i][1]}`);
+                arr.push(this.mass[i][1]);
+            }
+        }
+
+        // arr.map((item) => item.name);
+        // let isDuplicate = arr.some((item, idx) => arr.indexOf(item) !== idx);
+        // if (isDuplicate) {
+        //     output.sort();
+        // }
+        return output;
     }
+
 
     add(player) {
-
-        this.array1.push(`${player[0]}:${player[1]}`);
-        if (!this.isSet) {
-            this.array2 = new Array(this.hall - 2 - this.array1.length).join(' ').split('');
-            this.isSet = true
-        }
-        this.player = [...this.array1, ...this.array2];
+        let ob = [player[0], player[1]];
+        this.mass.push(ob);
         return this
     }
+
 }
 
-
-const top = new TopRated(8);
-top.add(["D", 45]).add(["A", 4]).add(["E", 3]).add(["I", 1]);
+const top = new TopRated(7);
+top.add(["A", 1]).add(["D", 4]).add(["C", 2]).add(['ff', 4]);
+let array = new Array(top.hall - top.mass.length).fill(' ');
+top.mass = [...top.mass, ...array];
 console.log(top.list);
-console.log(top.array1);
-console.log(top.array2);
