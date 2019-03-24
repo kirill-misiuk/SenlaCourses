@@ -4,7 +4,8 @@ class TopRated {
     constructor(hall) {
 
         this.hall = hall || 5;
-        this.mass = []
+        this.array = [];
+        this.emptyArray = [];
     }
 
     get list() {
@@ -12,36 +13,36 @@ class TopRated {
         let output = [];
         let arr = [];
         const sDecrease = (a, b) => b[1] - a[1];
-        this.mass.sort(sDecrease);
-        for (let i = 0; i < this.mass.length; ++i) {
+        const sortAlphaNum = (a, b) => b.localeCompare(a, 'en', {numeric: true});
+        this.array.sort(sDecrease);
+        for (let i = 0; i < this.array.length; ++i) {
 
-            if (this.mass[i][0] === ' ') {
-                output.push(`${this.mass[i][0]}`);
+            if (this.array[i][0] === ' ') {
+                output.push(`${this.array[i][0]}`);
             } else {
-                output.push(`${this.mass[i][0]}:${this.mass[i][1]}`);
-                arr.push(this.mass[i][1]);
+                output.push(`${this.array[i][0]}:${this.array[i][1]}`);
+                arr.push(this.array[i][1]);
             }
         }
 
-        // arr.map((item) => item.name);
-        // let isDuplicate = arr.some((item, idx) => arr.indexOf(item) !== idx);
-        // if (isDuplicate) {
-        //     output.sort();
-        // }
-        return output;
+        arr.map((item) => item.name);
+        let isDuplicate = arr.some((item, idx) => arr.indexOf(item) !== idx);
+        if (isDuplicate) {
+            output.sort(sortAlphaNum)
+        }
+        return [...output, ...this.emptyArray];
     }
 
 
     add(player) {
         let ob = [player[0], player[1]];
-        this.mass.push(ob);
+        this.array.push(ob);
         return this
     }
 
 }
 
-const top = new TopRated(7);
-top.add(["A", 1]).add(["D", 4]).add(["C", 2]).add(['ff', 4]);
-let array = new Array(top.hall - top.mass.length).fill(' ');
-top.mass = [...top.mass, ...array];
+const top = new TopRated(6);
+top.add(["A", 1]).add(["F", 4]).add(["C", 2]).add(['D', 4]);
+top.emptyArray = new Array(top.hall - top.array.length).fill(' ');
 console.log(top.list);
