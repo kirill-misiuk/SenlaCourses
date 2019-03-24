@@ -33,7 +33,7 @@ class TopRated {
 
 
     add(player) {
-        let d = this.hall - this.array.length;
+        let d = this.hall - this.array.length-1;
         if (d < 0) d = 0;
         this.emptyArray = new Array(d).fill(' ');
         const sort = (a, b) => b - a;
@@ -54,6 +54,6 @@ class TopRated {
     }
 }
 
-const top = new TopRated(3);
+const top = new TopRated(6);
 top.add(["A", 1]).add(["F", 3]).add(["C", 2]).add(['D', 4]);
 console.log(top.list);
