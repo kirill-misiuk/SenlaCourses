@@ -6,17 +6,14 @@ class TopRated {
         this.hall = hall || 5;
         this.array = [];
         this.emptyArray = [];
+        this.numArray = [];
     }
 
     get list() {
-
         let output = [];
         let arr = [];
-        const sDecrease = (a, b) => b[1] - a[1];
         const sortAlphaNum = (a, b) => b.localeCompare(a, 'en', {numeric: true});
-        this.array.sort(sDecrease);
         for (let i = 0; i < this.array.length; ++i) {
-
             if (this.array[i][0] === ' ') {
                 output.push(`${this.array[i][0]}`);
             } else {
@@ -24,7 +21,6 @@ class TopRated {
                 arr.push(this.array[i][1]);
             }
         }
-
         arr.map((item) => item.name);
         let isDuplicate = arr.some((item, idx) => arr.indexOf(item) !== idx);
         if (isDuplicate) {
@@ -35,14 +31,30 @@ class TopRated {
 
 
     add(player) {
+        let mass = [];
+        const sort = (a, b) => b - a;
+        this.numArray.push(player[1]);
+        this.numArray.sort(sort);
+        const sDecrease = (a, b) => b[1] - a[1];
         let ob = [player[0], player[1]];
-        this.array.push(ob);
+
+        if (this.numArray.length > this.hall && this.numArray[this.numArray.length - 1] < player[1]) {
+            this.array[this.array.length - 1] = ob
+
+        } else {
+
+            this.array.push(ob);
+            this.array.sort(sDecrease);
+        }
         return this
     }
-
 }
 
 const top = new TopRated(6);
-top.add(["A", 1]).add(["F", 4]).add(["C", 2]).add(['D', 4]);
-top.emptyArray = new Array(top.hall - top.array.length).fill(' ');
+let d = top.hall - top.array.length;
+if (d < 0) d = 0;
+top.emptyArray = new Array(d).fill(' ');
+
+
+top.add(["A", 1]).add(["F", 3]).add(["C", 2]).add(['D', 4]);
 console.log(top.list);
