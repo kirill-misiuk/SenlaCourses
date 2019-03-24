@@ -12,6 +12,8 @@ class TopRated {
     get list() {
         let output = [];
         let arr = [];
+        const sDecrease = (a, b) => b[1] - a[1];
+        this.array.sort(sDecrease);
         const sortAlphaNum = (a, b) => b.localeCompare(a, 'en', {numeric: true});
         for (let i = 0; i < this.array.length; ++i) {
             if (this.array[i][0] === ' ') {
@@ -31,7 +33,9 @@ class TopRated {
 
 
     add(player) {
-        let mass = [];
+        let d = this.hall - this.array.length;
+        if (d < 0) d = 0;
+        this.emptyArray = new Array(d).fill(' ');
         const sort = (a, b) => b - a;
         this.numArray.push(player[1]);
         this.numArray.sort(sort);
@@ -50,11 +54,6 @@ class TopRated {
     }
 }
 
-const top = new TopRated(6);
-let d = top.hall - top.array.length;
-if (d < 0) d = 0;
-top.emptyArray = new Array(d).fill(' ');
-
-
+const top = new TopRated(3);
 top.add(["A", 1]).add(["F", 3]).add(["C", 2]).add(['D', 4]);
 console.log(top.list);
