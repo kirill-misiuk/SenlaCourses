@@ -5,11 +5,11 @@ function handleErrors(res) {
     return res;
 }
 function getName(id){
-    return fetch(`https://jsonplaceholder.typicode.com/posts?id=${id}`)
+    return fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`)
         .then(handleErrors)
         .catch(error=>console.log(error))
         .then(response => response.json())
-        .then(json => json.map(a => a.userId))
+        .then(json => json.map(a => a.name))
         .then(result=>console.log(result))
 }
 getName(3);
