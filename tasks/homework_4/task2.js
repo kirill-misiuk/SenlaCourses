@@ -10,7 +10,7 @@ class TopRated {
     }
 
     add(player) {
-
+this.numArray=[];
         const sort = (a, b) => b - a;
         for (let i = 0; i < this.array.length; i++) {
             this.numArray.push(this.array[i][1])
@@ -30,10 +30,26 @@ class TopRated {
 
 
         } else {
-            if (this.numArray[this.numArray.length - 1] < player[1]) {
+            if ( this.hall>this.numArray.length && this.numArray[this.numArray.length - 1] > player[1]  ) {
+
                 this.array.push(ob);
-                this.array.sort(sDecrease);
                 this.numArray.push(player[1]);
+
+            }else{
+                if(this.hall<this.numArray.length && this.numArray[this.numArray.length - 1] > player[1]  ){
+                    this.array.push(ob);
+                    this.array.sort(sDecrease);
+                    this.array.length = this.hall;
+                    this.numArray.push(player[1])
+
+                }else{
+                if(this.hall>this.numArray.length && this.numArray[this.numArray.length - 1] < player[1]  ) {
+                    this.array.push(ob);
+                    this.array.sort(sDecrease);
+                    this.array.length = this.hall;
+                    this.numArray.push(player[1])
+                }
+                }
 
             }
 
@@ -68,16 +84,12 @@ class TopRated {
         return [...output, ...this.emptyArray];
     }
 }
-
-const top = new TopRated(2, [["F", 7], ["C", 10], ['D', 4]]);
-top.add(["A", 10]);
+const top = new TopRated(3, [["F", 7], ["C", 10], ['D', 4]]);
+top.add(["A", 10]).add(['D',44]);
 console.log(top.list);
 const x = new TopRated(3, [["Bob", 88], ["Eva", 66], ["Ada", 44]]);
 x.add(["Clo", 10]);
 console.log(x.list);
-const w = new TopRated(3, [['Bob', 88], ['Kim', 88], ['Zoe', 88]]);
-w.add(['Clo', 10]).add(['Ada', 44]);
-console.log(w.list);
 const e = new TopRated(3, [['Ada', 444], ['Bob', 2222], ['Clo', 55]]);
 console.log(e.list);
 const g = new TopRated(3, [['Bob', 88], ['Kim', 88], ['Zoe', 88]]);
