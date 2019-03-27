@@ -4,11 +4,36 @@ import Header from './Header'
 import Footer from "./Footer";
 import MainPage from "./MainPage";
 
-const App = () => (
-    <div className="App">
-        <Header/>
-        <MainPage/>
-        <Footer/>
-    </div>
-);
-export default App;
+
+
+class App extends React.Component {
+    state = {
+        fruits: ['banana', 'lemon', 'apple']
+    };
+    componentDidMount() {
+        setInterval(() => {
+            this.setState({fruits: ['banana', 'lemon', 'apple']})
+        }, 5000);
+
+    }
+
+    render() {
+
+        console.log('************Parent App************');
+        return (
+
+                    <div className="App">
+                        <Header/>
+                        <MainPage/>
+                        <Footer/>
+                    </div>
+
+        );
+
+
+    }
+}
+
+
+export default App
+

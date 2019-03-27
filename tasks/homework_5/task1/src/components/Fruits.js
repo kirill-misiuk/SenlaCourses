@@ -1,17 +1,21 @@
-import React from 'react'
-class Fruits extends React.Component {
-    state = {
-        array:['apple','banana','lemon']
-    };
+import React, {PureComponent} from 'react'
 
+export class Fruits extends PureComponent {
 
     render() {
-        const {count} = this.state;
+        console.log('this is list ');
+        const {fruits} = this.props;
         return (
-<div>
-</div>
 
-)}
+            <ul>
 
+                {fruits.map((item) => (
+                    <li key={item.id}><h3>{item}</h3></li>
+                ))}
+            </ul>
+
+        )
+    }
+}
 
 export default Fruits

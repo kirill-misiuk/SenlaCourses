@@ -1,36 +1,23 @@
-import React from 'react'
-class MainPage extends React.Component {
+import React, {PureComponent} from 'react'
+import Fruits from './Fruits'
+
+class MainPage extends PureComponent {
     state = {
-        count: 0
-    };
-    plusButtonClick = () => {
-        this.setState(({count}) => ({count: count + 1}))
-    };
-    minusButtonClick = () => {
-        this.setState(({count}) => ({count: count - 1}))
+        fruits: ['banana', 'lemon', 'apple']
     };
 
     render() {
-        const {count} = this.state;
+        const {fruits} = this.state;
+        console.log('************Parent Component************');
         return (
-
-            <div id="inner-content">
-                <div>
-                    <h1>Count:{count}</h1>
-                </div>
-                <div>
-                    <button id="button" onClick={this.plusButtonClick}>+</button>
-                    <button id="button" onClick={this.minusButtonClick}>-</button>
-                </div>
-
+            <div>
+                <Fruits fruits={fruits}/>
             </div>
-
         );
 
 
     }
 }
-
 
 export default MainPage
 
