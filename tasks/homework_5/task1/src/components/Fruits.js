@@ -3,9 +3,6 @@ import React, {PureComponent} from 'react'
 export class Fruits extends PureComponent {
     render() {
         const {fruits} = this.props;
-        if (fruits.length <= 0) {
-            throw new Error();
-        }
         return (
             <ul>
                 {fruits.map((item) => (
