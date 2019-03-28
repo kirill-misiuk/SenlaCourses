@@ -10,7 +10,7 @@ class MainPage extends PureComponent {
         const {fruits} = this.state;
         console.log('************Parent Component************');
         return (
-            <div>
+            <div >
                 <Fruits fruits={fruits}/>
             </div>
         );
