@@ -1,26 +1,26 @@
 import React, { PureComponent } from 'react';
 
 class ErrorBoundary extends PureComponent {
-  state = {
-    error: null
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = { error: false };
+  }
   componentDidCatch(error, info) {
     console.log('info', info);
     console.log('error', error);
-    
+
     this.setState({error});
   }
 
   render() {
     const {error} = this.state;
     const {children} = this.props;
-    
-    return (
-      error
-        ? <p>Something went wrong, sorry.</p>
-        : children
 
+    return (
+
+      error
+        ?<p>Array is empty</p>
+        : children
     )
   }
 }

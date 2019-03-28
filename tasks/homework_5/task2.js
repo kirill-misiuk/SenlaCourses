@@ -23,16 +23,18 @@ function getAddress(arr,zip) {
         zipStr = zipStr.join();
         if (zipStr === zip) {
             numberArray[f] = arr2[i].match(/^[0-9]*|,[0-9]*/gi).join('');
-            adressArray[f] = arr2[i].match(/[a-z\.\s]/gi);
+            adressArray[f] = arr2[i].match(/[A-z\.\s]/gi);
+
             adressArray[f].length = adressArray[f].length - 3;
             adressArray[f] = adressArray[f].join('');
             f++;
 
         }
     }
-
     let numberStr = numberArray.join(',');
     let adressStr = adressArray.join(',');
+    adressStr=adressStr.replace(/\s,\s*/,',');
+    adressStr=adressStr.replace(/^\s*/,'').replace(/\s*$/,'');
     return `${zip}:${adressStr}/${numberStr}`
 }
 
