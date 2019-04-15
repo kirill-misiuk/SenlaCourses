@@ -2,6 +2,7 @@ function check(arr) {
     const obj = {};
     let count = 1;
     let Array = [];
+    let mass = [];
     arr.forEach(item => Array.push(...item));
     Array.sort((a, b) => a - b).forEach((item, i) => {
         if (Array[i] === Array[i + 1]) count++;
@@ -10,11 +11,9 @@ function check(arr) {
             count = 1;
         }
     });
-    const max = Math.max(...Object.values(obj));
 
-    let mass = [];
     for (let count in obj) {
-        if (max === obj[count]) {
+        if (Math.max(...Object.values(obj)) === obj[count]) {
             mass.push(count)
         }
     }
@@ -27,6 +26,7 @@ function check(arr) {
                 }
             }
         }
+
         arr = arr.map((x) => x.filter(i => i !== '<1 empty item>'))
     }
     return arr
