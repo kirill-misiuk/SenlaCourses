@@ -1,19 +1,10 @@
-
+func=(number)=>{
+  let sum=0;
+  for(let i=0;i<number.length;i++)sum+=+number[i];
+    return sum
+};
 function check(numbers) {
-    numbers=[...numbers];
-    digsum = (number) => {
-        if (number.toString().length === 1) {
-            return number;
-        }
-        // if(numbers===[])return 0;
-        const tmp = number.toString().split('');
-        let sum = tmp.reduce((a, b) => +a + +b);
-        sum = digsum(sum);
-
-        return sum;
-    };
-    let result = numbers.map(digsum).sort((a, b) => b - a).join();
-    return result
+    return numbers.split(' ').sort((a,b)=>func(a)===func(b)? a-b: func(a)-func(b)).join(' ')
 }
 
-console.log(check(34,35,36));
+console.log(check('53133 145 162715 132 472273 97 181372 29 137714 40 456194 51 146067 84 93657 120 110688 55 239413 28 84'));

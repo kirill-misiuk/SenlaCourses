@@ -1,24 +1,17 @@
-import React from 'react';
-import '../index.css';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
-import MainPage from './MainPage'
-import Navigation from './Navigation'
+import React, {Component} from 'react';
+import AddTodoForm from './AddTodoForm';
+import TodoList from './TodoList';
+import './App.css';
 
-class App extends React.Component {
+class App extends Component {
     render() {
         return (
-            <BrowserRouter>
-                <div className="App">
-                    <Navigation/>
-                    <Switch>
-                        <Route path="/" component={MainPage} exact/>
-                        <Redirect to="/"/>
-                    </Switch>
-                </div>
-            </BrowserRouter>
+            <div className="App">
+                <AddTodoForm name="felex" />
+                <TodoList />
+            </div>
         );
     }
 }
 
-export default App
-
+export default App;

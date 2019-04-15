@@ -7,6 +7,8 @@ class Navigation extends Component {
     return (
       <nav className="navigation">
         <NavLink to="/" className="nav-item" activeClassName="active-nav-item" exact>Main</NavLink>
+        <NavLink to="/books" className="nav-item" activeClassName="active-nav-item" exact>Books</NavLink>
+        <NavLink to="/cart" className="nav-item" activeClassName="active-nav-item" exact>Cart</NavLink>
       </nav>
     );
   }
