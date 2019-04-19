@@ -6,7 +6,7 @@ class Todo extends Component {
   handleDeleteButton = () => {
     const {id} = this.props;
     this.props.dispatch(deleteTodo(id));
-  }
+  };
   render() {
 
     const { text } = this.props;
@@ -19,4 +19,4 @@ class Todo extends Component {
   }
 }
 
-export default connect()(Todo)
+export default connect(deleteTodo(id))(Todo)

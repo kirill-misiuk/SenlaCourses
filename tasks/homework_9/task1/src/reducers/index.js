@@ -1,10 +1,7 @@
 import {combineReducers} from 'redux';
-import items from './items';
-import fruits from './fruits';
-
+import users from './users'
 const rootReducer = combineReducers({
-  todos: items,
-  fruits
+  users
 });
 
 export default rootReducer;
