@@ -6,16 +6,15 @@ import Title from './Title';
 class TitleList extends Component {
 
   render() {
-    const {users} = this.props;
+    const {posts} = this.props;
 
     return (
       <ul>
-        {users.map((item) => (
+        {posts.map((item) => (
           <Title key={item.id} {...item} />
         ))}
       </ul>
     )
   }
 }
-
-export default connect(state => ({users: getPosts(state)}))(TitleList);
+export default connect(state => ({posts: getPosts(state)}))(TitleList);

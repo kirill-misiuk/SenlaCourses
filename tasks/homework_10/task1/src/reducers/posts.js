@@ -26,8 +26,8 @@ const addPosts = () => (dispatch, getState) => {
         }))
 };
 
-
-
+const getState = state => state.posts;
+const getPostById = (state, id) => getState(state).posts.find(photo => photo.id === +id);
 const getPosts = state => state.posts.posts;
 
 export default posts
@@ -37,5 +37,5 @@ export {
     getPosts,
 
     // selectors
-
+    getPostById
 }
