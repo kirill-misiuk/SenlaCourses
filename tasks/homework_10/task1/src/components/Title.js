@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 
 
-class User extends Component {
+class Title extends Component {
 
 
   render() {
@@ -14,4 +14,4 @@ class User extends Component {
   }
 }
 
-export default connect()(User)
+export default connect()(Title)

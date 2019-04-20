@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addUsers} from "../reducers/users";
-import UserList from './UsersList';
+import {addPosts} from "../reducers/posts";
+import TitleList from './TitleList';
 
 class App extends Component {
     componentDidMount() {
-        const {addUsers} = this.props;
-        addUsers();
+        const {addPosts} = this.props;
+        addPosts();
     }
   render() {
     return (
       <div className="App">
-        <UserList />
+        <TitleList />
       </div>
     );
   }
 }
 
-export default connect(null, {addUsers})(App);
+export default connect(null, {addPosts})(App);

@@ -1,13 +1,13 @@
 const initialstate = {
-    users: []
+    posts: []
 };
 
-const users = (state = initialstate, action) => {
+const posts = (state = initialstate, action) => {
     switch (action.type) {
-        case 'ADD_USERS':
+        case 'ADD_TITLE':
             return {
                 ...state,
-                users: action.payload
+                posts: action.payload
             };
 
         default:
@@ -17,24 +17,24 @@ const users = (state = initialstate, action) => {
 
 };
 
-const addUsers = () => (dispatch, getState) => {
+const addPosts = () => (dispatch, getState) => {
     fetch(`https://jsonplaceholder.typicode.com/posts`)
         .then((res) => res.json())
         .then((result) => dispatch({
-            type: 'ADD_USERS',
+            type: 'ADD_TITLE',
             payload: result
         }))
 };
 
 
 
-const getUsers = state => state.users.users;
+const getPosts = state => state.posts.posts;
 
-export default users
+export default posts
 export {
     // actions
-    addUsers,
-    getUsers,
+    addPosts,
+    getPosts,
 
     // selectors
 
