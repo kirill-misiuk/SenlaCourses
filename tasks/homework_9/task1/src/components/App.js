@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addUsers} from "../reducers/users";
-import TodoList from './UsersList';
+import UserList from './UsersList';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <button onClick={addUsers}>Add users</button>
-        <TodoList />
+        <UserList />
       </div>
     );
   }
