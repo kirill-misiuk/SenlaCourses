@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-
-
 class Title extends Component {
-
-
   render() {
-    const {title} = this.props;
-    const {id}=this.props
+    const {id}=this.props;
+    const {title}=this.props;
     return (
         <Link to={`/photos/${id}`}>
       <li className="hover-eff"  >{title}</li>
@@ -16,5 +12,4 @@ class Title extends Component {
     )
   }
 }
-
 export default connect()(Title)

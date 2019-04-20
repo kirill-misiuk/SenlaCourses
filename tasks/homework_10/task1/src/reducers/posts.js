@@ -1,7 +1,6 @@
 const initialstate = {
     posts: []
 };
-
 const posts = (state = initialstate, action) => {
     switch (action.type) {
         case 'ADD_TITLE':
@@ -13,10 +12,7 @@ const posts = (state = initialstate, action) => {
         default:
             return state;
     }
-
-
 };
-
 const addPosts = () => (dispatch, getState) => {
     fetch(`https://jsonplaceholder.typicode.com/posts`)
         .then((res) => res.json())
@@ -25,17 +21,15 @@ const addPosts = () => (dispatch, getState) => {
             payload: result
         }))
 };
-
 const getState = state => state.posts;
+const selectPosts = state => getState(state).posts;
 const getPostById = (state, id) => getState(state).posts.find(photo => photo.id === +id);
-const getPosts = state => state.posts.posts;
 
 export default posts
 export {
     // actions
     addPosts,
-    getPosts,
-
     // selectors
-    getPostById
+    getPostById,
+    selectPosts
 }
