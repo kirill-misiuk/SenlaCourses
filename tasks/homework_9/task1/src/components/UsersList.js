@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getUsers} from "../reducers/users";
-import Todo from './User';
+import User from './User';
 
 class UsersList extends Component {
 
@@ -11,7 +11,7 @@ class UsersList extends Component {
     return (
       <ul>
         {users.map((item) => (
-          <Todo key={item.id} {...item} />
+          <User key={item.id} {...item} />
         ))}
       </ul>
     )
