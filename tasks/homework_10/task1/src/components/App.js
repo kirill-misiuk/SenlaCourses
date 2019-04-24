@@ -6,26 +6,25 @@ import PhotoPage from '../PhotoPage'
 import {
     BrowserRouter, Route, Switch, Redirect
 } from 'react-router-dom';
+
 class App extends Component {
     componentDidMount() {
         const {addPosts} = this.props;
         addPosts();
     }
-  render() {
-    return (
-        <BrowserRouter>
-            <div className="App">
-                <Switch>
-                <Route path='/' component={TitleList} exact/>
-                    <Route path="/photos/:id" component={PhotoPage} />
-                    <Redirect to="/" />
-                </Switch>
-            </div>
-        </BrowserRouter>
-
-
-    );
-  }
+    render() {
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Switch>
+                        <Route path='/' component={TitleList} exact/>
+                        <Route path="/photos/:id" component={PhotoPage}/>
+                        <Redirect to="/"/>
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default connect(null, {addPosts})(App);
