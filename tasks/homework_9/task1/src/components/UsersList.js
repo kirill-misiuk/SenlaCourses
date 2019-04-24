@@ -5,17 +5,17 @@ import User from './User';
 
 class UsersList extends Component {
 
-  render() {
-    const {users} = this.props;
+    render() {
+        const {users} = this.props;
 
-    return (
-      <ul>
-        {users.map((item) => (
-          <User key={item.id} {...item} />
-        ))}
-      </ul>
-    )
-  }
+        return (
+            <ul>
+                {users.map((item) => (
+                    <User key={item.id} {...item} />
+                ))}
+            </ul>
+        )
+    }
 }
 
 export default connect(state => ({users: getUsers(state)}))(UsersList);
