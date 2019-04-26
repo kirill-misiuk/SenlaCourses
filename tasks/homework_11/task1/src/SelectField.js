@@ -5,8 +5,8 @@ const SelectField = props => (
     <label>{props.label}</label>
     <select {...props.input}>
       <option />
-      <option value="red">Red</option>
-      <option value="green">Green</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
     </select>
   </div>
 );

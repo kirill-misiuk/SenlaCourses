@@ -8,14 +8,14 @@ import {compose} from 'redux';
 import InputField from './InputField';
 import SelectField from './SelectField';
 import {
-  required, minLength, minNumber, matchesPassword
+  required, minLength, minNumber, checkEmail, checkbox, checkString
 } from './validation';
+import asyncValidate from './asyncValidate';
 
 const Form = ({
-  handleSubmit, pristine, submitting, reset, invalid, name: {name, surname}
+  handleSubmit, pristine, submitting, reset, invalid
 }) => (
   <div className="form">
-    <p>{`${name}  ${surname}`}</p>
     <h2>Form</h2>
     <form onSubmit={handleSubmit}>
       <Field
@@ -23,7 +23,7 @@ const Form = ({
         label="Name"
         type="text"
         component={InputField}
-        validate={required}
+        validate={[required, minLength]}
       />
       <Field
         name="surname"
@@ -33,6 +33,20 @@ const Form = ({
         validate={[required, minLength]}
       />
       <Field
+        name="username"
+        label="Username"
+        type="text"
+        component={InputField}
+        validate={[required, minLength, checkString]}
+      />
+      <Field
+        name="email"
+        label="Email"
+        type="text"
+        component={InputField}
+        validate={[required, checkEmail]}
+      />
+      <Field
         name="age"
         label="Age"
         type="number"
@@ -40,29 +54,17 @@ const Form = ({
         validate={[required, minNumber]}
       />
       <Field
-        name="password"
-        label="Password"
-        type="text"
-        component={InputField}
-        validate={[required]}
-      />
-      <Field
-        name="confirmPassword"
-        label="Confirm Password"
-        type="text"
-        component={InputField}
-        validate={[required, matchesPassword]}
-      />
-      <Field
-        label="Favourite color"
-        name="color"
+        label="Gender"
+        name="gender"
         component={SelectField}
       />
       <Field
-        label="Sign up to newsletters?"
+        label="Agree with terms and conditions"
         name="subscription"
         type="checkbox"
+        value={false}
         component={InputField}
+        validate={checkbox}
       />
       <button type="submit" disabled={invalid}>send</button>
       <button type="button" onClick={reset} disabled={pristine || submitting}>clear</button>
@@ -76,7 +78,7 @@ Form.propTypes = {
   submitting: PropTypes.bool.isRequired,
   invalid: PropTypes.bool.isRequired,
   reset: PropTypes.func.isRequired,
-  name: PropTypes.object.isRequired
+
 };
 
 const selector = formValueSelector('simpleForm');
@@ -91,40 +93,11 @@ export default compose(
   reduxForm({
     form: 'simpleForm',
     enableReinitialize: true,
-    initialValues: {
-      name: 'Felex',
-      color: 'green',
-      subscription: true
-    },
+    asyncValidate,
+    asyncBlurFields: ['email'],
     onSubmit: (values, dispatch, props) => {
       alert(JSON.stringify(values, null, 4))
       props.reset();
     }
   })
 )(Form);
-
-// const Form = ({handleSubmit}) => (
-//   <div className="form">
-//     <h2>Form</h2>
-//     <form onSubmit={handleSubmit}>
-//       <Field
-//         name="name"
-//         label="Name"
-//         type="text"
-//         component={InputField}
-//       />
-//         <Field
-//           label="Favourite color"
-//           name="color"
-//           component={SelectField}
-//         />
-//       <Field
-//         label="Sign up to newsletters?"
-//         name="subscription"
-//         type="checkbox"
-//         component={InputField}
-//       />
-//       <button type="submit">send</button>
-//     </form>
-//   </div>
-// );
