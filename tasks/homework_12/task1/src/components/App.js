@@ -7,7 +7,7 @@ import NewTask from './NewTask';
 import talking from '../images/taking_notes.png';
 import Nav from './Nav';
 import TodoItem from './TodoItem';
-import Header from './header';
+import Header from './Header';
 
 const App = (props) => {
   const {todos, li, handleSubmitButton, handleDeleteTodo,handleDoneTodo, handleFavoriteTodo, handleFilterSearch, handleNavButtons} = props;
