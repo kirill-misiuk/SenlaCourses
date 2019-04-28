@@ -1,6 +1,5 @@
 import React from 'react';
 import {compose,withState,withHandlers} from 'recompose'
-import PropTypes from 'prop-types';
 import guid from '../utils';
 
 const MainPage = (props) => {
@@ -24,24 +23,24 @@ const MainPage = (props) => {
 export default compose(
   withState('todo', 'handleTodo', ''),
   withHandlers({
-    handleChangeInput: () => () => 0,
+    handleChangeInput: props => (e) => {
+      const {handleTodo} = props;
+      handleTodo(e.target.value);
+    },
 
-    handleSubmit: () => () => 0
+    handleSubmit: props => (e) => {
+      e.preventDefault();
+      const {onSubmit, todo,handleTodo} = props;
+      const result = {
+        id: guid(),
+        todo,
+        done: false,
+        favorite: false,
+        search: false
+      };
+
+      onSubmit(result);
+      handleTodo('');
+    }
   })
 )(MainPage);
-// handleChangeInput = e => this.setState({[e.target.name]: e.target.value});
-//
-// handleSubmit = (e) => {
-//   e.preventDefault();
-//   const {onSubmit} = this.props;
-//   const {todo} = this.state;
-//   const result = {
-//     id: guid(),
-//     todo,
-//     done: false,
-//     favorite: false,
-//     search: false
-//   };
-//   onSubmit(result);
-//   this.setState({todo: ''});
-// };

@@ -27,10 +27,10 @@ const  Header = (props) => {
 export default compose(
   pure,
   withState(' search', 'handleSearch', ''),
-  withHandlers({})
+  withHandlers({
+    handleChangeInput:props=> e => {
+    const {onSearch} = props;
+    onSearch(e.target.value)
+    }
+  })
 )(Header);
-// handleChangeInput = (e) => {
-//   this.setState({[e.target.name]: e.target.value});
-//   const {onSearch} = this.props;
-//   onSearch(e.target.value);
-// };

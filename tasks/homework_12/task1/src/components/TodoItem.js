@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import {compose, withState, withHandlers} from 'recompose';
 import './styles.css';
 import logo from '../images/Delete.png';
@@ -59,9 +58,9 @@ const TodoItem = (props) => {
 export default compose(
   withState('inside', 'insideHandler', false),
   withHandlers({
-    handleDeleteButton: ({toggleDeleteButton}) => id => toggleDeleteButton(id),
-    handleFavoriteButton: ({toggleFavoriteButton}) => id => toggleFavoriteButton(id),
-    handleDoneButton: ({toggleDoneButton}) => id => toggleDoneButton(id),
+    handleDeleteButton: ({toggleDeleteButton,id})  => toggleDeleteButton(id),
+    handleFavoriteButton: ({toggleFavoriteButton,id})  => toggleFavoriteButton(id),
+    handleDoneButton: ({toggleDoneButton,id})  => toggleDoneButton(id),
     handleOutEnter: ({insideHandler}) => insideHandler(false),
     handleHoverEnter: ({insideHandler}) => insideHandler(true)
   })

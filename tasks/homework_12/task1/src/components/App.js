@@ -47,41 +47,17 @@ export default compose(
   withState('todos', 'hadnleTodos', []),
   withState('li', 'handleLi', 'All'),
   lifecycle({
-    saveStateToLocalStorage() {
-      for (const key in this.state) {
-        localStorage.setItem(key, JSON.stringify(this.state[key]));
-      }
-    },
-
-    hydrateStateWithLocalStorage() {
-      for (const key in this.state) {
-        if (localStorage.hasOwnProperty(key)) {
-          let value = localStorage.getItem(key);
-          try {
-            value = JSON.parse(value);
-            this.setState({[key]: value});
-          } catch (e) {
-            this.setState({[key]: value});
-          }
-        }
-      }
-    },
-    componentDidMount() {
-      this.hydrateStateWithLocalStorage();
-      window.addEventListener(
-        'beforeunload',
-        this.saveStateToLocalStorage.bind(this)
-      );
-    },
-
-    componentWillUnmount() {
-      window.removeEventListener(
-        'beforeunload',
-        this.saveStateToLocalStorage.bind(this)
-      );
-      this.saveStateToLocalStorage();
-    }
-  }),
+     componentDidMount() {
+       const {hadnleTodos}=this.props;
+       const cachedTodos = JSON.parse(localStorage.getItem(('todos')));
+       if(hadnleTodos){
+          hadnleTodos(cachedTodos)
+        }},
+     componentDidUpdate() {
+       const{todos}=this.props;
+       localStorage.setItem('todos',JSON.stringify(todos))
+     }
+   }),
 
   withHandlers({
     handleSubmitButton: ({todos,hadnleTodos}) => value => hadnleTodos([value, ...todos]),
@@ -112,35 +88,24 @@ export default compose(
         };
       });
       hadnleTodos(result);
+    },
+    handleFilterSearch: ({todos,handleLi,hadnleTodos})=>(value) =>{
+      const a = [...todos];
+      let todoRes=a.map((t) => {
+        let flag = false;
+        (t.todo.indexOf(value) !== -1) ? flag = true : flag = false;
+        return {
+          ...t,
+          search: flag
+        };
+      });
+      hadnleTodos(todoRes);
+      handleLi('Search');
+      if(value===''){
+        handleLi('All');
+        hadnleTodos(a.map(t => ({...t, search: false})));
+      }
     }
 
   })
 )(App);
-
-
-// handleFilterSearch = (value) => {
-//   const {todos} = this.state;
-//   const a = [...todos];
-//   this.setState({
-//     todos: a.map((t) => {
-//       let flag = false;
-//       (t.todo.indexOf(value) !== -1) ? flag = true : flag = false;
-//       return {
-//         ...t,
-//         search: flag
-//       };
-//     })
-//   });
-//   this.setState({tab: 'Search'});
-//   if (value === '') {
-//     this.setState({todos: a.map(t => ({...t, search: false}))});
-//     this.setState({tab: 'All'});
-//   }
-//
-//   this.setState({li: 'Search'});
-//   if (value === '') {
-//     this.setState({todos: a.map(t => ({...t, search: false}))});
-//     this.setState({li: 'All'});
-//   }
-// };
-//
