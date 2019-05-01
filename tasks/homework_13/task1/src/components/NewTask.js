@@ -1,9 +1,24 @@
-import React from 'react';
-import {compose,withState,withHandlers} from 'recompose'
+import React, {useCallback, useState, memo} from 'react';
+import PropTypes from 'prop-types';
 import guid from '../utils';
 
-const MainPage = (props) => {
-  const {todo, handleChangeInput, handleSubmit} = props;
+const MainPage = ({onSubmit}) => {
+  const [todo, handleTodo] = useState('');
+  const handleChangeInput = useCallback((e) => {
+    handleTodo(e.target.value);
+  }, []);
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+    const result = {
+      id: guid(),
+      todo,
+      done: false,
+      favorite: false,
+      search: false
+    };
+    onSubmit(result);
+    handleTodo('');
+  }, [todo, onSubmit]);
   return (
     <form onSubmit={handleSubmit} id="task">
       <h1 id="text">New Task</h1>
@@ -19,28 +34,7 @@ const MainPage = (props) => {
     </form>
   );
 };
-
-export default compose(
-  withState('todo', 'handleTodo', ''),
-  withHandlers({
-    handleChangeInput: props => (e) => {
-      const {handleTodo} = props;
-      handleTodo(e.target.value);
-    },
-
-    handleSubmit: props => (e) => {
-      e.preventDefault();
-      const {onSubmit, todo,handleTodo} = props;
-      const result = {
-        id: guid(),
-        todo,
-        done: false,
-        favorite: false,
-        search: false
-      };
-
-      onSubmit(result);
-      handleTodo('');
-    }
-  })
-)(MainPage);
+MainPage.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
+export default memo(MainPage);

@@ -1,15 +1,18 @@
-import React from 'react';
-import {compose, withState, withHandlers} from 'recompose';
+import React, {useState, useCallback, memo} from 'react';
 import './styles.css';
+import PropTypes from 'prop-types';
 import logo from '../images/Delete.png';
 
-const TodoItem = (props) => {
-  const {
-    inside, todo, done, favorite, handleDeleteButton, handleFavoriteButton, handleDoneButton, handleHoverEnter, handleOutEnter
-  } = props;
-  // state = {
-  //   inside: false,
-  // };
+const TodoItem = ({
+  todo, favorite, done, id, toggleDeleteButton, toggleFavoriteButton, toggleDoneButton
+}) => {
+  const [inside, insideHandler] = useState(false);
+  const handleDeleteButton = useCallback(() => toggleDeleteButton(id), [toggleDeleteButton, id]);
+  const handleFavoriteButton = useCallback(() => toggleFavoriteButton(id),
+    [toggleDeleteButton, id]);
+  const handleDoneButton = useCallback(() => toggleDoneButton(id), [toggleDoneButton, id]);
+  const handleOutEnter = useCallback(() => insideHandler(false), [insideHandler, inside]);
+  const handleHoverEnter = useCallback(() => insideHandler(true),[insideHandler, inside]);
   let text = 'Not Important';
   if (!favorite) text = 'Mark Important';
   return (
@@ -54,14 +57,14 @@ const TodoItem = (props) => {
     </div>
   );
 };
+TodoItem.propTypes = {
+  todo: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
+  favorite: PropTypes.bool.isRequired,
+  toggleDeleteButton: PropTypes.func.isRequired,
+  toggleFavoriteButton: PropTypes.func.isRequired,
+  toggleDoneButton: PropTypes.func.isRequired,
+};
 
-export default compose(
-  withState('inside', 'insideHandler', false),
-  withHandlers({
-    handleDeleteButton: ({toggleDeleteButton,id})  => toggleDeleteButton(id),
-    handleFavoriteButton: ({toggleFavoriteButton,id})  => toggleFavoriteButton(id),
-    handleDoneButton: ({toggleDoneButton,id})  => toggleDoneButton(id),
-    handleOutEnter: ({insideHandler}) => insideHandler(false),
-    handleHoverEnter: ({insideHandler}) => insideHandler(true)
-  })
-)(TodoItem);
+export default memo(TodoItem);

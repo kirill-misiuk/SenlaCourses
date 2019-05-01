@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useCallback, memo} from 'react';
+import PropTypes from 'prop-types';
 
-import {compose, pure, withHandlers} from 'recompose';
-
-const Nav = (props) => {
-
-  const {handleAllButton, handleActiveButton, handleDoneButton} = props;
-
+const Nav = ({nav}) => {
+  const handleAllButton = useCallback(() => nav('All'), [nav]);
+  const handleActiveButton = useCallback(() => nav('Active'), [nav]);
+  const handleDoneButton = useCallback(() => nav('Done'), [nav]);
   return (
 
     <nav id="navigation">
@@ -21,18 +20,10 @@ const Nav = (props) => {
           <button onClick={handleDoneButton}>Done</button>
         </li>
       </ul>
-
     </nav>
   );
 };
-
-export default compose(
-  pure,
-  withHandlers({
-    handleAllButton: ({nav}) => nav('All'),
-
-    handleActiveButton: ({nav}) => nav('Active'),
-
-    handleDoneButton: ({nav}) => nav('Done'),
-  })
-)(Nav);
+Nav.propTypes = {
+  nav: PropTypes.func.isRequired
+};
+export default memo(Nav);
