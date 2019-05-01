@@ -1,9 +1,13 @@
 import React, {useState, useCallback, memo} from 'react';
+import PropTypes from 'prop-types';
 import logo from '../images/logo.png';
 
 const Header = ({onSearch}) => {
   const [search, updateSearch] = useState('');
-  const handleChangeInput = useCallback(e => onSearch(e.target.value),[search, onSearch])
+  const handleChangeInput = useCallback((e) => {
+    const result = onSearch(e.target.value);
+    updateSearch(result);
+  }, [onSearch, search]);
   return (
     <header id="page-header">
       <div>
@@ -24,12 +28,8 @@ const Header = ({onSearch}) => {
   );
 };
 
+Header.propTypes = {
+  onSearch: PropTypes.func.isRequired
+};
+
 export default memo(Header);
-// pure,
-// withState(' search', 'handleSearch', ''),
-// withHandlers({
-//   handleChangeInput:props=> e => {
-//     const {onSearch} = props;
-//     onSearch(e.target.value)
-//   }
-// })
