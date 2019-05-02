@@ -5,7 +5,7 @@ import NewTask from './NewTask';
 import talking from '../images/taking_notes.png';
 import Nav from './Nav';
 import TodoItem from './TodoItem';
-import Header from './header';
+import Header from './Header';
 
 const App = () => {
   const [todos, updateTodos] = useState([]);
