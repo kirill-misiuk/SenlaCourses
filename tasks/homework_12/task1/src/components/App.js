@@ -69,23 +69,21 @@ export default compose(
     handleNavButtons: ({handleLi}) => value => handleLi(value),
     handleDoneTodo: ({todos, hadnleTodos}) => (id) => {
       const result = todos.map((todo) => {
-        let done = todo.done;
-        if (todo.id === id) done = !todo.done;
-        return {
+        if (todo.id === id)return {
           ...todo,
-          done
+          done: !todo.done
         };
+        return todo
       });
       hadnleTodos(result);
     },
     handleFavoriteTodo:({todos,hadnleTodos}) => (id) =>{
       let result= todos.map((todo) => {
-        let favorite = todo.favorite;
-        if (todo.id === id) favorite = !todo.favorite;
-        return {
+        if (todo.id === id) return {
           ...todo,
-          favorite
+          favorite: !todo.favorite
         };
+        return todo
       });
       hadnleTodos(result);
     },

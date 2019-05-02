@@ -1,4 +1,6 @@
-import React, {useCallback, useState, memo} from 'react';
+import React, {
+  useCallback, useState, useEffect, memo
+} from 'react';
 import NewTask from './NewTask';
 import talking from '../images/taking_notes.png';
 import Nav from './Nav';
@@ -14,26 +16,28 @@ const App = () => {
   const handleNavButtons = useCallback(value => handleLi(value), [li]);
   const handleDoneTodo = useCallback((id) => {
     const result = todos.map((todo) => {
-      let {done} = todo.done;
-      if (todo.id === id) done = !todo.done;
-      return {
-        ...todo,
-        done
-      };
+      if (todo.id === id) {
+        return {
+          ...todo,
+          done: !todo.done
+        };
+      }
+      return todo;
     });
     updateTodos(result);
   }, [todos]);
   const handleFavoriteTodo = useCallback((id) => {
     const result = todos.map((todo) => {
-      let {favorite} = todo.favorite;
-      if (todo.id === id) favorite = !todo.favorite;
-      return {
-        ...todo,
-        favorite
-      };
+      if (todo.id === id) {
+        return {
+          ...todo,
+          favorite: !todo.favorite
+        };
+      }
+      return todo;
     });
     updateTodos(result);
-  },[todos]);
+  }, [todos]);
   const handleFilterSearch = useCallback((value) => {
     const a = [...todos];
     const todoRes = a.map((t) => {
@@ -46,24 +50,21 @@ const App = () => {
     });
     updateTodos(todoRes);
     handleLi('Search');
-    if (value === ''){
+    if (value === '') {
       handleLi('All');
       updateTodos(a.map(t => ({...t, search: false})));
     }
   }, [todos]);
-  //  lifecycle({
-  //    componentDidMount() {
-  //      const {hadnleTodos} = this.props;
-  //      const cachedTodos = JSON.parse(localStorage.getItem(('todos')));
-  //      if (hadnleTodos){
-  //        hadnleTodos(cachedTodos);
-  //      }
-  //    },
-  //    componentDidUpdate() {
-  //      const {todos} = this.props;
-  //      localStorage.setItem('todos',JSON.stringify(todos))
-  //    }
-  //  })
+  useEffect(() => {
+    const cachedTodos = JSON.parse(localStorage.getItem(('todos')));
+    if (updateTodos) {
+      updateTodos(cachedTodos);
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   let liArr = [];
   if (li === 'All') liArr = todos;
   if (li === 'Active') liArr = todos.filter(value => !value.done);
