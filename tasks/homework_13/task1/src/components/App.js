@@ -65,11 +65,11 @@ const App = () => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  let liArr = [];
-  if (filter === 'All') liArr = todos;
-  if (filter === 'Active') liArr = todos.filter(value => !value.done);
-  if (filter === 'Done') liArr = todos.filter(value => value.done);
-  if (filter === 'Search') liArr = todos.filter(value => value.search);
+  let filterArr = [];
+  if (filter === 'All') filterArr = todos;
+  if (filter === 'Active') filterArr = todos.filter(value => !value.done);
+  if (filter === 'Done') filterArr = todos.filter(value => value.done);
+  if (filter === 'Search') filterArr = todos.filter(value => value.search);
 
   return (
     <div>
@@ -79,7 +79,7 @@ const App = () => {
       <NewTask onSubmit={handleSubmitButton} />
       <div id="list-container">
         <ul className="todo-list">
-          {liArr.map(todo => (
+          {filterArr.map(todo => (
             <TodoItem
               key={todo.id}
               favorite={todo.favorite}
