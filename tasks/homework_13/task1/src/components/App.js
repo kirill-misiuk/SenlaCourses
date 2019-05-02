@@ -9,11 +9,11 @@ import Header from './header';
 
 const App = () => {
   const [todos, updateTodos] = useState([]);
-  const [li, handleLi] = useState('All');
+  const [filter, handleFilter] = useState('All');
   const handleSubmitButton = useCallback(value => updateTodos([value, ...todos]), [todos]);
   const handleDeleteTodo = useCallback(id => updateTodos(todos.filter(todo => todo.id !== id)),
     [todos]);
-  const handleNavButtons = useCallback(value => handleLi(value), [li]);
+  const handleNavButtons = useCallback(value => handleFilter(value), [filter]);
   const handleDoneTodo = useCallback((id) => {
     const result = todos.map((todo) => {
       if (todo.id === id) {
@@ -49,9 +49,9 @@ const App = () => {
       };
     });
     updateTodos(todoRes);
-    handleLi('Search');
+    handleFilter('Search');
     if (value === '') {
-      handleLi('All');
+      handleFilter('All');
       updateTodos(a.map(t => ({...t, search: false})));
     }
   }, [todos]);
@@ -66,10 +66,10 @@ const App = () => {
   }, [todos]);
 
   let liArr = [];
-  if (li === 'All') liArr = todos;
-  if (li === 'Active') liArr = todos.filter(value => !value.done);
-  if (li === 'Done') liArr = todos.filter(value => value.done);
-  if (li === 'Search') liArr = todos.filter(value => value.search);
+  if (filter === 'All') liArr = todos;
+  if (filter === 'Active') liArr = todos.filter(value => !value.done);
+  if (filter === 'Done') liArr = todos.filter(value => value.done);
+  if (filter === 'Search') liArr = todos.filter(value => value.search);
 
   return (
     <div>

@@ -10,12 +10,12 @@ import TodoItem from './TodoItem';
 import Header from './Header';
 
 const App = (props) => {
-  const {todos, li, handleSubmitButton, handleDeleteTodo,handleDoneTodo, handleFavoriteTodo, handleFilterSearch, handleNavButtons} = props;
-  let liArr = [];
-  if (li === 'All') liArr = todos;
-  if (li === 'Active') liArr = todos.filter(value => !value.done);
-  if (li === 'Done') liArr = todos.filter(value => value.done);
-  if (li === 'Search') liArr = todos.filter(value => value.search);
+  const {todos, filter, handleSubmitButton, handleDeleteTodo,handleDoneTodo, handleFavoriteTodo, handleFilterSearch, handleNavButtons} = props;
+  let filterArr = [];
+  if (filter === 'All') filterArr = todos;
+  if (filter === 'Active') filterArr = todos.filter(value => !value.done);
+  if (filter === 'Done') filterArr = todos.filter(value => value.done);
+  if (filter === 'Search') filterArr = todos.filter(value => value.search);
 
   return (
       <div>
@@ -25,7 +25,7 @@ const App = (props) => {
         <NewTask onSubmit={handleSubmitButton} />
         <div id="list-container">
           <ul className="todo-list">
-            {liArr.map(todo => (
+            {filterArr.map(todo => (
               <TodoItem
                 key={todo.id}
                 favorite={todo.favorite}
@@ -45,7 +45,7 @@ const App = (props) => {
 export default compose(
   pure,
   withState('todos', 'hadnleTodos', []),
-  withState('li', 'handleLi', 'All'),
+  withState('filter', 'handleFilter', 'All'),
   lifecycle({
      componentDidMount() {
        const {hadnleTodos}=this.props;
@@ -66,7 +66,7 @@ export default compose(
 
       hadnleTodos(result);
     },
-    handleNavButtons: ({handleLi}) => value => handleLi(value),
+    handleNavButtons: ({handleFilter}) => value => handleFilter(value),
     handleDoneTodo: ({todos, hadnleTodos}) => (id) => {
       const result = todos.map((todo) => {
         if (todo.id === id)return {
@@ -87,7 +87,7 @@ export default compose(
       });
       hadnleTodos(result);
     },
-    handleFilterSearch: ({todos,handleLi,hadnleTodos})=>(value) =>{
+    handleFilterSearch: ({todos,handleFilter,hadnleTodos})=>(value) =>{
       const a = [...todos];
       let todoRes=a.map((t) => {
         let flag = false;
@@ -98,9 +98,9 @@ export default compose(
         };
       });
       hadnleTodos(todoRes);
-      handleLi('Search');
+      handleFilter('Search');
       if(value===''){
-        handleLi('All');
+        handleFilter('All');
         hadnleTodos(a.map(t => ({...t, search: false})));
       }
     }
