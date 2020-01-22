@@ -19,4 +19,4 @@ class Todo extends Component {
   }
 }
 
-export default connect(deleteTodo(id))(Todo)
+export default connect()(Todo)

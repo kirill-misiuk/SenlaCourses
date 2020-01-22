@@ -1,8 +1,4 @@
-const initialValues = {
-  todos: [],
-  flag: true,
-  names: ['123123']
-};
+
 
 const todos = (state = initialValues, action) => {
   switch (action.type) {
